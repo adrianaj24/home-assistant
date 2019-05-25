@@ -1,4 +1,4 @@
-/* * {
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -10,6 +10,22 @@ body {
   margin: 0;
 }
 
-body {
+.body {
   font-size: 14px;
-} */
+  border-style: dotted;
+  height: 150px;
+  color: pink;
+  background-color: pink;
+}
+
+.header {
+  height: 150px;
+  border-style: dotted;
+  color: palevioletred;
+}
+
+.footer {
+  height: 150px;
+  border-style: dotted;
+  color: palevioletred;
+}
