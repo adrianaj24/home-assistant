@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
+import "./mediaSource.js"
 
 export default class App extends React.Component {
   render() {
@@ -15,7 +16,7 @@ export default class App extends React.Component {
       <div style={rootStyles}>
         <div className="header">This is the title</div>
         <div className="body" style={bodyStyle}>
-          <ReactPlayer
+          <ReactPlayer className="video"
             url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
             // playing
           />

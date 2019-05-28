@@ -5,6 +5,7 @@ import App from "./components/app";
 import { Router } from "react-router-dom";
 import { history } from "./history";
 
+
 ReactDOM.render(
   <Router history={history}>
     <App />
