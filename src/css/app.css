@@ -29,3 +29,12 @@ body {
   border-style: dotted;
   color: palevioletred;
 }
+
+.body {
+  flex: center;
+}
+
+.video {
+  display: flex;
+  justify-content: center;
+}
