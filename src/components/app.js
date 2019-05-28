@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
+import "./mediaSource.js";
 
 export default class App extends React.Component {
   render() {
@@ -26,6 +27,10 @@ export default class App extends React.Component {
               No Videos{" "}
             </video>
           </div>
+          {/* <ReactPlayer className="video"
+            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+            // playing
+          /> */}
         </div>
         <div className="footer">Footer</div>
       </div>
