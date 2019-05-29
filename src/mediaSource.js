@@ -1,3 +1,4 @@
+
 var vidElement = document.querySelector('video');
 
 if (window.MediaSource) {
@@ -10,10 +11,10 @@ if (window.MediaSource) {
 
 function sourceOpen(e) {
   URL.revokeObjectURL(vidElement.src);
-  var mime = 'video/mp4; codecs="opus, vp09.00.10.08"';
+  var mime = 'video/webm; codecs="opus, vp09.00.10.08"';
   var mediaSource = e.target;
   var sourceBuffer = mediaSource.addSourceBuffer(mime);
-  var videoUrl = 'https://d1p7vmfdxc45kc.cloudfront.net/Sample+Videos+2.mp4';
+  var videoUrl = 'video.mp4';
   fetch(videoUrl)
     .then(function(response) {
       return response.arrayBuffer();
@@ -27,4 +28,3 @@ function sourceOpen(e) {
       sourceBuffer.appendBuffer(arrayBuffer);
     });
 }
-
