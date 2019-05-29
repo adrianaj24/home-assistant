@@ -23,7 +23,6 @@ export default class App extends React.Component {
         <div className="body" style={bodyStyle}>
           <div>
             <video
-              preload="true"
               autoPlay
               controls
               id="my-video"
