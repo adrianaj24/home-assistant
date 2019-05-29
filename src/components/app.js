@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
-import { MEDIAURL } from "./mediaSource.js";
+import { startlivestream } from "./mediaSource.js";
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.mediaSource = this.mediaSource.bind(this);
+  }
   render() {
     const rootStyles = {
       display: "flex",
@@ -19,13 +23,16 @@ export default class App extends React.Component {
         <div className="body" style={bodyStyle}>
           <div>
             <video
+              preload="true"
               autoPlay
               controls
+              id="my-video"
               className="video"
-              src={MEDIAURL}
+              src=""
               width={700}
               height={500}
             />
+            <button onClick={startlivestream}>Start Stream </button>
           </div>
           <div className="footer">Footer</div>
         </div>
