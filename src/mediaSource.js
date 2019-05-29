@@ -30,23 +30,7 @@ function sourceOpen() {
   //   });
 
   // the same for the video SourceBuffer
-  fetch("https://s3.amazonaws.com/michaelcain-livestream/toystory.mp4")
-
-if (window.MediaSource) {
-  var mediaSource = new MediaSource();
-  vidElement.src = URL.createObjectURL(mediaSource);
-  mediaSource.addEventListener("sourceopen", sourceOpen);
-} else {
-  console.log("The Media Source Extensions API is not supported.");
-}
-
-function sourceOpen(e) {
-  URL.revokeObjectURL(vidElement.src);
-  var mime = 'video/webm; codecs="opus, vp09.00.10.08"';
-  var mediaSource = e.target;
-  var sourceBuffer = mediaSource.addSourceBuffer(mime);
-
-  fetch(videoUrl)
+  fetch("https://s3.amazonaws.com/michaelcain-livestream/frag_bunny+(1).mp4")
     .then(function(response) {
       // The data has to be a JavaScript ArrayBuffer
       return response.arrayBuffer();
@@ -54,4 +38,6 @@ function sourceOpen(e) {
     .then(function(videoData) {
       videoSourceBuffer.appendBuffer(videoData);
     });
+  // alert("Starting Live Stream");
+}
 
