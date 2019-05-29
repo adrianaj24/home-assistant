@@ -31,12 +31,10 @@ export default class App extends React.Component {
               width={700}
               height={500}
             />
-            <button onClick={startlivestream}>Start Stream </button>
+            <div>
+              <button onClick={startlivestream}>Start Stream </button>
+            </div>
           </div>
-          {/* <ReactPlayer className="video"
-            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-            // playing
-          /> */}
         </div>
         <div className="footer">Footer</div>
       </div>

@@ -29,7 +29,7 @@ function sourceOpen() {
   //   });
 
   // the same for the video SourceBuffer
-  fetch("https://s3.amazonaws.com/michaelcain-livestream/toystory.mp4")
+  fetch("https://s3.amazonaws.com/michaelcain-livestream/frag_bunny+(1).mp4")
     .then(function(response) {
       // The data has to be a JavaScript ArrayBuffer
       return response.arrayBuffer();
