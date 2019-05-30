@@ -29,13 +29,24 @@ function sourceOpen() {
   //   });
 
   // the same for the video SourceBuffer
-  fetch("https://s3.amazonaws.com/michaelcain-livestream/frag_bunny+(1).mp4")
-    .then(function(response) {
+  fetch("http://localhost:8080", {
+    mode: "cors"
+  })
+    .then(async function(response) {
+      let newResponse = await response.json();
       // The data has to be a JavaScript ArrayBuffer
-      return response.arrayBuffer();
+      console.log(newResponse.oldVideo.data);
+      const videoSourceBuffer = mediasource.addSourceBuffer(
+        'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+      );
+
+      videoSourceBuffer.appendBuffer(newResponse.oldVideo.data);
+
+      return newResponse.oldVideo.data.arrayBuffer();
     })
     .then(function(videoData) {
+      console.log("what is thisssss");
       videoSourceBuffer.appendBuffer(videoData);
     });
-  // alert("Starting Live Stream");
+  alert("Starting Live Stream");
 }

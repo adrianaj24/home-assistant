@@ -16,10 +16,12 @@ async function getLatestKeyFromS3Bucket(bucket) {
     let latest = response.Contents[0];
     for (let key of response.Contents) {
       if (key.LastModified > latest.LastModified) {
+        console.log("down here", latest.LastModified);
         latest = key;
       }
-      return latest;
     }
+    console.log("latest", latest);
+    return latest;
   } catch (error) {
     throw error;
   }
@@ -30,7 +32,7 @@ async function getObjectFromS3Bucket(bucket, key) {
   let params = { Bucket: bucket, Key: key };
   try {
     const response = await s3Client.getObject(params).promise();
-    console.log("something", response);
+    return response;
   } catch (error) {
     throw error;
   }

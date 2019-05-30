@@ -23,6 +23,7 @@ export default class App extends React.Component {
         <div className="body" style={bodyStyle}>
           <div className="video">
             <video
+              crossOrigin="anonymous"
               autoPlay
               controls
               id="my-video"
