@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import ReactPlayer from "react-player";
 import { startlivestream } from "./mediaSource.js";
 import "./mediaSource.js";
+import DatePicker from 'react-datepicker2';
+import moment from 'moment-jalaali'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { value: moment() };
     // this.mediaSource = this.mediaSource.bind(this);
   }
   render() {
@@ -18,6 +21,7 @@ export default class App extends React.Component {
       flex: "1"
     };
     return (
+      
       <div style={rootStyles}>
         <div className="header">This is the title</div>
         <div className="body" style={bodyStyle}>
@@ -35,6 +39,10 @@ export default class App extends React.Component {
             />
             <div>
               <button onClick={startlivestream}>Start Stream </button>
+              <DatePicker
+      onChange={value => this.setState({ value })}
+      value={this.state.value}
+    />
             </div>
           </div>
         </div>

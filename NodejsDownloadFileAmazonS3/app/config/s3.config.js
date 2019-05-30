@@ -8,7 +8,7 @@ const s3Client = new AWS.S3({
 });
 
 const downloadParams = {
-  Bucket: env.Bucket,
+  Bucket: 'michaelcain-livestream',
   Key: " "
 };
 
