@@ -23,20 +23,20 @@ export default class App extends React.Component {
         <div className="body" style={bodyStyle}>
           <div className="video">
             <video
+              crossOrigin="anonymous"
               autoPlay
               controls
+              type="video/mp4"
               id="my-video"
               className="video"
               src=""
               width={700}
               height={500}
             />
-            <button onClick={startlivestream}>Start Stream </button>
+            <div>
+              <button onClick={startlivestream}>Start Stream </button>
+            </div>
           </div>
-          {/* <ReactPlayer className="video"
-            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-            // playing
-          /> */}
         </div>
         <div className="footer">Footer</div>
       </div>
