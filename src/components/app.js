@@ -26,6 +26,7 @@ export default class App extends React.Component {
               crossOrigin="anonymous"
               autoPlay
               controls
+              type="video/mp4"
               id="my-video"
               className="video"
               src=""

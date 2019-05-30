@@ -16,11 +16,10 @@ async function getLatestKeyFromS3Bucket(bucket) {
     let latest = response.Contents[0];
     for (let key of response.Contents) {
       if (key.LastModified > latest.LastModified) {
-        console.log("down here", latest.LastModified);
         latest = key;
       }
     }
-    console.log("latest", latest);
+    console.log("FSFSFASFDS", latest);
     return latest;
   } catch (error) {
     throw error;

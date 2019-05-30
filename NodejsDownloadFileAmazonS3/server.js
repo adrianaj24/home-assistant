@@ -15,8 +15,9 @@ app.use("/api/files/:filename", router);
 app.get("/", async (req, res) => {
   var key = await getKey("michaelcain-livestream");
   var newObject = await getObject("michaelcain-livestream", key.Key);
-  res.send({ oldVideo: newObject.Body });
+  res.send(newObject.Body);
 });
+// res.send({ oldVideo: newObject.Body });
 // Create a Server
 const server = app.listen(8080, function() {
   let host = server.address().address;
