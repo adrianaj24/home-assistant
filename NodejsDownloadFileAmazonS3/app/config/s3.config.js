@@ -1,14 +1,14 @@
 const AWS = require("aws-sdk");
-// const env = require("./.env");
+const env = require("C:\\Users\\HA\\Documents\\GitHub\\.env");
 
 const s3Client = new AWS.S3({
-  accessKeyId: 'AKIAJF5APKX7UQEST5RA',
-  secretAccessKey: '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',
-  region: 'us-east-1'
+  accessKeyId: env.AWS_ACCESS_KEY,
+  secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+  region: env.REGION
 });
 
 const downloadParams = {
-  Bucket: 'michaelcain-livestream',
+  Bucket: env.Bucket,
   Key: " "
 };
 
