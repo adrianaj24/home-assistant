@@ -19,7 +19,24 @@ async function getLatestKeyFromS3Bucket(bucket) {
         latest = key;
       }
     }
-    console.log("FSFSFASFDS", latest);
+    return latest;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getSavedVideo(video, bucket) {
+  const s3Client = s3.s3Client;
+  let params = { Bucket: bucket };
+  try {
+    const response = await s3Client.listObjects(params).promise();
+    let latest = response.Contents[0];
+    for (let key of response.Contents) {
+      if (key.LastModified === video) {
+        latest = key;
+        console.log("LATEST", latest);
+      }
+    }
     return latest;
   } catch (error) {
     throw error;
@@ -61,3 +78,4 @@ exports.doDownload = (req, res) => {
 // })
 module.exports.getObjectFromS3Bucket = getObjectFromS3Bucket;
 module.exports.getLatestKeyFromS3Bucket = getLatestKeyFromS3Bucket;
+module.exports.getSavedVideo = getSavedVideo;

@@ -6,15 +6,21 @@ export function startlivestream() {
   myMediaSource.addEventListener("sourceopen", sourceOpen);
 }
 function sourceOpen() {
+  if (
+    window.MediaSource.isTypeSupported(
+      'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+    )
+  ) {
+    console.log("YES");
+  }
   // 1. add source buffers
 
   // const audioSourceBuffer = myMediaSource.addSourceBuffer(
   //   'audio/mp4; codecs="mp4a.40.2"'
   // );
+  const mediaCodec = 'video/mp4; codecs="avc1.4D601F"';
   var mediasource = this;
-  const videoSourceBuffer = mediasource.addSourceBuffer(
-    'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-  );
+  const videoSourceBuffer = mediasource.addSourceBuffer(mediaCodec);
 
   // 2. download and add our audio/video to the SourceBuffers
 
@@ -29,29 +35,36 @@ function sourceOpen() {
   //   });
 
   // the same for the video SourceBuffer
+  function checkVideo(url) {
+    var oReq = new XMLHttpRequest();
+    oReq.open("GET", url, true);
+    oReq.responseType = "arraybuffer";
 
-  var oReq = new XMLHttpRequest();
-  oReq.open("GET", "http://localhost:8080", true);
-  oReq.responseType = "arraybuffer";
+    oReq.onload = function(oEvent) {
+      var arrayBuffer = oReq.response; // Note: not oReq.responseText
+      if (arrayBuffer) {
+        // var byteArray = new Uint8Array(arrayBuffer);
+        // for (var i = 0; i < byteArray.byteLength; i++) {
+        //   // do something with each byte in the array
+        // }
+        console.log("44:", arrayBuffer);
 
-  oReq.onload = function(oEvent) {
-    var arrayBuffer = oReq.response; // Note: not oReq.responseText
-    if (arrayBuffer) {
-      // var byteArray = new Uint8Array(arrayBuffer);
-      // for (var i = 0; i < byteArray.byteLength; i++) {
-      //   // do something with each byte in the array
-      // }
-      console.log("44:", arrayBuffer);
+        // console.log(videoSourceBuffer);
+        videoSourceBuffer.addEventListener("updateend", function(_) {
+          mediasource.endOfStream();
+          document.getElementById("my-video").play();
+          //console.log(mediaSource.readyState); // ended
+        });
+        videoSourceBuffer.appendBuffer(arrayBuffer);
+      }
+    };
 
-      const videoSourceBuffer = mediasource.addSourceBuffer(
-        'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-      );
-      // console.log(videoSourceBuffer);
-      videoSourceBuffer.appendBuffer(arrayBuffer);
-    }
-  };
+    oReq.send(null);
+  }
 
-  oReq.send(null);
+  setInterval(function() {
+    checkVideo("http://localhost:8080");
+  }, 1000);
 
   // fetch("http://localhost:8080", {
   //   mode: "cors"
