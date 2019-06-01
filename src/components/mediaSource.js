@@ -64,7 +64,7 @@ function sourceOpen() {
 
   setInterval(function() {
     checkVideo("http://localhost:8080");
-  }, 500);
+  }, 5000);
 
   // fetch("http://localhost:8080", {
   //   mode: "cors"
