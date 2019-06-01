@@ -1,5 +1,5 @@
 const AWS = require("aws-sdk");
-const env = require("C:\\Users\\HA\\Documents\\GitHub\\.env");
+const env = require("./.env");
 
 const s3Client = new AWS.S3({
   accessKeyId: env.AWS_ACCESS_KEY,
