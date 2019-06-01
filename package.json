@@ -10,6 +10,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "history": "^4.9.0",
+    "moment-jalaali": "^0.8.3",
     "react": "^16.8.6",
     "react-datepicker2": "^3.0.0-beta.1",
     "react-dom": "^16.8.6",
