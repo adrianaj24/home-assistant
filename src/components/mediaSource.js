@@ -1,16 +1,8 @@
 export function startlivestream() {
   var video = document.getElementById("my-video");
 
-  // file:///C:/Users/HA/Documents/GitHub/teststream/index.html
-
-  // var assetURL =
-  // ("https://michaelcain-livestream.s3.amazonaws.com/frag_bunny+(1).mp4");
   const asset1 = "http://localhost:8080";
-  // console.log(video.src);
-  // const asset2 =
-  //   "https://michaelcain-livestream.s3.amazonaws.com/test-2019-06-01T15-04-44.mp4";
-  // Need to be specific for Blink regarding codecs
-  // ./mp4info frag_bunny.mp4 | grep Codec
+
   var mimeCodec = 'video/mp4; codecs="avc1.4D601F, mp4a.40.2"';
 
   const BUFFER_LENGTH = 3;
@@ -19,7 +11,6 @@ export function startlivestream() {
   var mediaSource = null;
   if ("MediaSource" in window && MediaSource.isTypeSupported(mimeCodec)) {
     mediaSource = new MediaSource();
-    //console.log(mediaSource.readyState); // closed
     video.src = URL.createObjectURL(mediaSource);
     mediaSource.addEventListener("sourceopen", sourceOpen);
   } else {
@@ -27,15 +18,13 @@ export function startlivestream() {
   }
 
   var sourceBuffer = null;
+
   function sourceOpen(_) {
     sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
     sourceBuffer.mode = "sequence";
-
     fetchSequence();
-
     video.addEventListener("timeupdate", check);
     console.log("I am checkingggg", check);
-
     video.addEventListener("canplay", function() {
       video.play();
     });
@@ -70,6 +59,7 @@ export function startlivestream() {
   const check = setInterval(function() {
     fetchSequence();
   }, 8000);
+
   // function checkBuffer(_) {
   //   console.log("checking buffer");
   //   // if (sequences.length < BUFFER_LENGTH) {
