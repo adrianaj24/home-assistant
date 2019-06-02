@@ -39,19 +39,19 @@ async function getObjectFromS3Bucket(bucket, key) {
 
 // function to download specific file in S3
 
-exports.doDownload = (req, res) => {
-  const s3Client = s3.s3Client;
-  const params = s3.downloadParams;
-  params.Key = req.params.filename;
+// exports.doDownload = (req, res) => {
+//   const s3Client = s3.s3Client;
+//   const params = s3.downloadParams;
+//   params.Key = req.params.filename;
 
-  s3Client
-    .getObject(params)
-    .createReadStream()
-    .on("error", function(err) {
-      res.status(500).json({ error: "Error -> " + err });
-    })
-    .pipe(res);
-};
+//   s3Client
+//     .getObject(params)
+//     .createReadStream()
+//     .on("error", function(err) {
+//       res.status(500).json({ error: "Error -> " + err });
+//     })
+//     .pipe(res);
+// };
 // s3.listObjects(params, function(err, data) {
 // 		if (err) {
 // 		console.log(err, err.stack)

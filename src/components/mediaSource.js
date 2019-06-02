@@ -1,90 +1,91 @@
 export function startlivestream() {
-  const videoElement = document.getElementById("my-video");
-  const myMediaSource = new MediaSource();
-  const url = URL.createObjectURL(myMediaSource);
-  videoElement.src = url;
-  myMediaSource.addEventListener("sourceopen", sourceOpen);
-}
-function sourceOpen() {
-  if (
-    window.MediaSource.isTypeSupported(
-      'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-    )
-  ) {
-    console.log("YES");
+  var video = document.getElementById("my-video");
+
+  // file:///C:/Users/HA/Documents/GitHub/teststream/index.html
+
+  // var assetURL =
+  // ("https://michaelcain-livestream.s3.amazonaws.com/frag_bunny+(1).mp4");
+  const asset1 = "http://localhost:8080";
+  // console.log(video.src);
+  // const asset2 =
+  //   "https://michaelcain-livestream.s3.amazonaws.com/test-2019-06-01T15-04-44.mp4";
+  // Need to be specific for Blink regarding codecs
+  // ./mp4info frag_bunny.mp4 | grep Codec
+  var mimeCodec = 'video/mp4; codecs="avc1.4D601F, mp4a.40.2"';
+
+  const BUFFER_LENGTH = 3;
+  var sequences = [];
+
+  var mediaSource = null;
+  if ("MediaSource" in window && MediaSource.isTypeSupported(mimeCodec)) {
+    mediaSource = new MediaSource();
+    //console.log(mediaSource.readyState); // closed
+    video.src = URL.createObjectURL(mediaSource);
+    mediaSource.addEventListener("sourceopen", sourceOpen);
+  } else {
+    console.error("Unsupported MIME type or codec: ", mimeCodec);
   }
-  // 1. add source buffers
 
-  // const audioSourceBuffer = myMediaSource.addSourceBuffer(
-  //   'audio/mp4; codecs="mp4a.40.2"'
-  // );
-  const mediaCodec = 'video/mp4; codecs="avc1.4D601F"';
-  var mediasource = this;
-  const videoSourceBuffer = mediasource.addSourceBuffer(mediaCodec);
+  var sourceBuffer = null;
+  function sourceOpen(_) {
+    sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+    sourceBuffer.mode = "sequence";
 
-  // 2. download and add our audio/video to the SourceBuffers
+    fetchSequence();
 
-  // for the audio SourceBuffer
-  // fetch("http://server.com/audio.mp4")
-  //   .then(function(response) {
-  //     // The data has to be a JavaScript ArrayBuffer
-  //     return response.arrayBuffer();
-  //   })
-  //   .then(function(audioData) {
-  //     audioSourceBuffer.appendBuffer(audioData);
-  //   });
+    video.addEventListener("timeupdate", check);
+    console.log("I am checkingggg", check);
 
-  // the same for the video SourceBuffer
-  function checkVideo(url) {
-    var oReq = new XMLHttpRequest();
-    oReq.open("GET", url, true);
-    oReq.responseType = "arraybuffer";
+    video.addEventListener("canplay", function() {
+      video.play();
+    });
+    video.addEventListener("seeking", seek);
+  }
 
-    oReq.onload = function(oEvent) {
-      var arrayBuffer = oReq.response; // Note: not oReq.responseText
-      if (arrayBuffer) {
-        // var byteArray = new Uint8Array(arrayBuffer);
-        // for (var i = 0; i < byteArray.byteLength; i++) {
-        //   // do something with each byte in the array
-        // }
-        console.log("44:", arrayBuffer);
+  const getNextUrl = () => {
+    return asset1;
+  };
 
-        // console.log(videoSourceBuffer);
-        videoSourceBuffer.addEventListener("updateend", function(_) {
-          mediasource.endOfStream();
-          document.getElementById("my-video").play();
-          //console.log(mediaSource.readyState); // ended
-        });
-        videoSourceBuffer.appendBuffer(arrayBuffer);
-      }
+  function fetchSequence() {
+    const url = getNextUrl();
+    var xhr = new XMLHttpRequest();
+    xhr.open("get", url);
+    xhr.responseType = "arraybuffer";
+    xhr.onload = function() {
+      appendSegment(xhr.response);
     };
-
-    oReq.send(null);
+    xhr.send();
   }
 
-  setInterval(function() {
-    checkVideo("http://localhost:8080");
-  }, 5000);
+  function appendSegment(chunk) {
+    sequences.push(chunk);
+    sourceBuffer.appendBuffer(chunk);
+    if (sequences.length > BUFFER_LENGTH - 1) {
+      console.log("sequences: ", sequences);
 
-  // fetch("http://localhost:8080", {
-  //   mode: "cors"
-  // }).then(async function(response) {
-  //   console.log("response", response);
-  //   let newResponse = await response.json();
-  //   // The data has to be a JavaScript ArrayBuffer
-  //   console.log("THIS IS THE LATEST VIDEO", newResponse.oldVideo.data);
-  //   const videoSourceBuffer = mediasource.addSourceBuffer(
-  //     'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-  //   );
-  //   console.log(videoSourceBuffer);
-  //   videoSourceBuffer.appendBuffer(newResponse.oldVideo.data);
+      sequences.splice(0, 1);
+    }
+  }
 
-  //   return newResponse.oldVideo.data.arrayBuffer();
-  // });
+  const check = setInterval(function() {
+    fetchSequence();
+  }, 8000);
+  // function checkBuffer(_) {
+  //   console.log("checking buffer");
+  //   // if (sequences.length < BUFFER_LENGTH) {
+  //   console.log("this is the checkkk", check);
+  //   return check;
+  //   // }
+  // }
 
-  //     .then(function(videoData) {
-  //       console.log("what is thisssss");
-  //       videoSourceBuffer.appendBuffer(videoData);
-  //     });
-  //   alert("Starting Live Stream");
+  function seek(e) {
+    console.log(e);
+    if (mediaSource.readyState === "open") {
+      sourceBuffer.abort();
+      console.log(mediaSource.readyState);
+    } else {
+      console.log("seek but not open?");
+      console.log(mediaSource.readyState);
+    }
+  }
 }
