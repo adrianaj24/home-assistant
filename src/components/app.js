@@ -68,10 +68,7 @@ export default class App extends React.Component {
             </div>
           </div>
         </div>
-        {/* <DatePicker
-          onChange={value => this.setState({ value })}
-          value={this.state.value}
-        /> */}
+       
         <div className="video">
           <video
             crossOrigin="anonymous"
@@ -84,7 +81,7 @@ export default class App extends React.Component {
             width={700}
             height={500}
           />
-          <form onSubmit={this.handleSubmit}>
+          {/* <form onSubmit={this.handleSubmit}>
             <label>
               Time:
               <input
@@ -94,12 +91,17 @@ export default class App extends React.Component {
               />
             </label>
             <input type="submit" value="Submit" />
-          </form>
+          </form> */}
           <div>
             <button onClick={loadDoc}>Start saved video </button>
           </div>
         </div>
-
+        <div>
+          <DatePicker
+            onChange={value => this.setState({ value })}
+            value={this.state.value}
+          />
+        </div>
         <div className="footer">Footer</div>
       </div>
     );

@@ -25,6 +25,7 @@ async function getLatestKeyFromS3Bucket(bucket) {
   try {
     const response = await s3Client.listObjects(params).promise();
     let latest = response.Contents[0];
+    // console.log("this is the latest", latest)
     for (let key of response.Contents) {
       if (key.LastModified > latest.LastModified) {
         latest = key;

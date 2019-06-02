@@ -3,8 +3,9 @@ var getObject = controller.getObjectFromS3Bucket;
 var getKey = controller.getLatestKeyFromS3Bucket;
 var getSavedVideo = controller.getSavedVideo;
 let router = require("./app/routers/s3.router.js");
-
-console.log("key", getKey);
+let savedRoute = require("./app/routers/s3.savedVideo.js")
+// const aws = controller.getSavedVideo;
+var stream = require('stream');
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -13,7 +14,7 @@ app.use(bodyParser.json());
 var cors = require("cors");
 
 app.use(cors());
-app.use("/api/savedvideo", router)
+app.use("/", savedRoute)
 
 app.get("/", async (req, res) => {
   var key = await getKey("michaelcain-livestream");
@@ -28,8 +29,14 @@ app.post("/api/savedvideo", (req, res) => {
       // let newArray = []
       let newSavedVideo = JSON.parse(data.raw)
       let updatedVideo = newSavedVideo["Contents"]
-      console.log("this is the saved video in POST", updatedVideo)
-      res.send("okay")
+      // let lastVideo = updatedVideo[0] 
+      // let latest;
+      // for (item of lastVideo) {
+      //   if (item.LastModified < )
+      // }
+
+      console.log("this is the saved video in POST", updatedVideo[0])   
+      res.send(updatedVideo[0])
     })
 });
 
