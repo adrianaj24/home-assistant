@@ -51,14 +51,13 @@ export function startlivestream() {
     sourceBuffer.appendBuffer(chunk);
     if (sequences.length > BUFFER_LENGTH - 1) {
       console.log("sequences: ", sequences);
-
       sequences.splice(0, 1);
     }
   }
 
   const check = setInterval(function() {
     fetchSequence();
-  }, 8000);
+  }, 6000);
 
   // function checkBuffer(_) {
   //   console.log("checking buffer");

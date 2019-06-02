@@ -8,6 +8,7 @@ async function mainFunction() {
 mainFunction();
 
 // function to loop thru all items in s3 bucket.
+
 async function getLatestKeyFromS3Bucket(bucket) {
   const s3Client = s3.s3Client;
   let params = { Bucket: bucket };
