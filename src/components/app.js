@@ -24,6 +24,7 @@ export default class App extends React.Component {
   handleSubmit(event) {
     alert("A name was submitted: " + this.state.value);
     var something = this.state.value;
+    var data = something._d
     event.preventDefault();
 
     fetch("http://localhost:8080/api/savedvideo", {
@@ -32,9 +33,8 @@ export default class App extends React.Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        firstParam: something
-      })
+      body: 
+        JSON.stringify({firstParam: data.toLocaleString()})
     });
   }
 
@@ -97,10 +97,13 @@ export default class App extends React.Component {
           </div>
         </div>
         <div>
+        <form onSubmit={this.handleSubmit}>
           <DatePicker
             onChange={value => this.setState({ value })}
             value={this.state.value}
           />
+          <input type="submit" value="Submit" />
+          </form>
         </div>
         <div className="footer">Footer</div>
       </div>

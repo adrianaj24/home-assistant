@@ -3,6 +3,7 @@ var getObject = controller.getObjectFromS3Bucket;
 var getKey = controller.getLatestKeyFromS3Bucket;
 var getSavedVideo = controller.getSavedVideo;
 let router = require("./app/routers/s3.router.js");
+const moment = require('moment')
 let savedRoute = require("./app/routers/s3.savedVideo.js")
 // const aws = controller.getSavedVideo;
 var stream = require('stream');
@@ -24,6 +25,9 @@ app.get("/", async (req, res) => {
 
 app.post("/api/savedvideo", (req, res) => {
   let savedVideo = req.body.firstParam
+  console.log(savedVideo)
+  var newDate = moment(savedVideo, 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]')
+  console.log("this is the params", newDate);
   getSavedVideo(savedVideo, "michaelcain-livestream")
     .then(function (data) {
       // let newArray = []
@@ -34,7 +38,6 @@ app.post("/api/savedvideo", (req, res) => {
       // for (item of lastVideo) {
       //   if (item.LastModified < )
       // }
-
       console.log("this is the saved video in POST", updatedVideo[0])   
       res.send(updatedVideo[0])
     })
