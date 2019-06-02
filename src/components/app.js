@@ -1,106 +1,141 @@
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
+import smarthomeImage2 from "../images/background2.png";
 import { startlivestream } from "./mediaSource.js";
 import "./mediaSource.js";
-import DatePicker from "react-datepicker2";
+import DatePicker from "react-datepicker";
 import moment from "moment-jalaali";
 import { loadDoc } from "./savedMedia.js";
 import "./savedMedia.js";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
+    this.state = {
+      date: moment()
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  // onChange = date => this.setState({ date });
+
+  handleChange(date) {
+    this.setState({ startDate: date });
   }
 
   handleSubmit(event) {
-    alert("A name was submitted: " + this.state.value);
-    var something = this.state.value;
     event.preventDefault();
-
-    fetch("http://localhost:8080/api/savedvideo", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        firstParam: something
-      })
-    });
+    let something = this.state.startDate;
   }
 
   render() {
     const rootStyles = {
-      display: "flex",
-      flexDirection: "column",
-      minHeight: "100vh"
+      backgroundImage: `url(${smarthomeImage2})`,
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      height: "100%"
     };
     const bodyStyle = {
       flex: "1"
     };
+    const btnStyle = {
+      height: "3rem",
+      padding: "0px, 12px, 12px",
+      borderradius: "75%"
+    };
     return (
       <div style={rootStyles}>
-        <div className="header">This is the title</div>
-        <div className="body" style={bodyStyle}>
-          <div className="video">
-            <video
-              crossOrigin="anonymous"
-              autoPlay
-              controls
-              type="video/mp4"
-              id="my-video"
-              className="video"
-              src=""
-              width={700}
-              height={500}
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <Link className="navbar-brand" to="#">
+            H🏠VEN
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <Link className="nav-link" to="#">
+                  <span className="sr-only">(current)</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="#">
+                  Link
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <DatePicker
+              className="calendar"
+              selected={this.state.startDate}
+              onChange={this.handleChange}
+              value={this.state.date}
+              showTimeSelect
+              timeFormat="HH:mm"
+              dateFormat="MMMM d, yyyy h:mm aa"
+              timeCaption="time"
+              dateFormat="Pp"
             />
-            <div>
-              <button onClick={startlivestream}>Start Stream </button>
+          </div>
+        </nav>
+        <div className="section">
+          <div className="video">
+            <div className="videoWrapper">
+              <video
+                crossOrigin="anonymous"
+                autoPlay
+                controls
+                type="video/mp4"
+                id="my-video"
+                className="video"
+                src=""
+                width={700}
+                height={500}
+              />
+            </div>
+            <div className="videoBtn">
+              <div className="btn">
+                <button style={btnStyle} onClick={startlivestream}>
+                  Start Stream{" "}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        {/* <DatePicker
-          onChange={value => this.setState({ value })}
-          value={this.state.value}
-        /> */}
-        <div className="video">
-          <video
-            crossOrigin="anonymous"
-            autoPlay
-            controls
-            type="video/mp4"
-            id="saved-video"
-            className="video"
-            src=""
-            width={700}
-            height={500}
-          />
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Time:
-              <input
-                type="text"
-                value={this.state.value}
-                onChange={this.handleChange}
+        <div className="section">
+          <div className="video">
+            <div className="videoWrapper">
+              <video
+                crossOrigin="anonymous"
+                autoPlay
+                controls
+                type="video/mp4"
+                id="saved-video"
+                className="video"
+                src=""
+                width={700}
+                height={500}
               />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-          <div>
-            <button onClick={loadDoc}>Start saved video </button>
+            </div>
           </div>
         </div>
-
-        <div className="footer">Footer</div>
       </div>
     );
   }

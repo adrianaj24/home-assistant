@@ -1,4 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Overpass+Mono:300,400&display=swap");
+
 * {
+  font-family: "Overpass Mono", monospace;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -10,18 +13,25 @@ body {
   margin: 0;
 }
 
-.body {
-  font-size: 14px;
-  border-style: dotted;
-  height: 150px;
-  color: pink;
-  background-color: pink;
+.calendar {
+  margin-right: 10rem;
 }
 
-.header {
-  height: 150px;
-  border-style: dotted;
-  color: palevioletred;
+.body {
+  font-size: 14px;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.calendar {
+  font-size: 1.25rem;
+}
+
+.videoWrapper {
+  width: 100%;
 }
 
 .footer {
@@ -30,11 +40,25 @@ body {
   color: palevioletred;
 }
 
-.body {
-  flex: center;
+.videoWrapper {
+  width: 100%;
 }
 
-.video {
+.section {
   display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.videoBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section .formWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }

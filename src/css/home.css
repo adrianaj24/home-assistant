@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css?family=Overpass+Mono:300,400&display=swap");
+@keyframes slide {
+  0% {
+    transform: translate3d(0, 0, 0) repeat-x;
+  }
+
+  100% {
+    transform: translate3d(-1000px, 0, 0);
+  }
+}
+
+.animation-container {
+  animation: slide 50s linear infinite;
+  display: flex;
+}
+
+.image {
+  background-image: url(/src/images/smarthome.png);
+  z-index: 1;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.h1 h1 {
+  font-family: "Overpass Mono", monospace;
+  font-size: 10rem;
+}
+
+.main {
+  font-family: "Overpass Mono", monospace;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rounded-btn {
+  border-radius: 75px;
+  border: 5px solid white;
+  padding: 16px;
+  text-decoration: none;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.rounded-btn1 {
+  border-radius: 75px;
+  border: 5px solid white;
+  padding: 16px;
+  text-decoration: none;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
