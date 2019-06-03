@@ -3,7 +3,7 @@ import ReactPlayer from "react-player";
 import smarthomeImage2 from "../images/background2.png";
 import { startlivestream } from "./mediaSource.js";
 import "./mediaSource.js";
-import DatePicker from "react-datepicker";
+import DatePicker from "react-datepicker2";
 import moment from "moment-jalaali";
 import { loadDoc } from "./savedMedia.js";
 import "./savedMedia.js";
@@ -16,7 +16,9 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: moment()
+      date: moment(),
+      videos: [],
+      value: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,13 +27,36 @@ export default class App extends React.Component {
 
   // onChange = date => this.setState({ date });
 
-  handleChange(date) {
-    this.setState({ startDate: date });
+  // handleChange(date) {
+  //   this.setState({ startDate: date });
+  // }
+
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   let something = this.state.startDate;
+  // }
+
+  handleChange(event) {
+    this.setState({ value: event.target.value });
   }
 
   handleSubmit(event) {
+    alert("A name was submitted: " + this.state.value);
+    var something = this.state.value;
+    var data = something._d;
     event.preventDefault();
-    let something = this.state.startDate;
+
+    fetch("http://localhost:8080/api/savedvideo", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ firstParam: data.toLocaleString() })
+    })
+      .then(res => res.json())
+      .then(response => this.setState({ videos: response }))
+      .catch(error => console.error("Error:", error));
   }
 
   render() {
@@ -52,7 +77,7 @@ export default class App extends React.Component {
     return (
       <div style={rootStyles}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <Link className="navbar-brand" to="#">
+          <Link className="navbar-brand" href="http://localhost:3000">
             H🏠VEN
           </Link>
           <button
@@ -82,17 +107,20 @@ export default class App extends React.Component {
             </ul>
           </div>
           <div>
-            <DatePicker
-              className="calendar"
-              selected={this.state.startDate}
-              onChange={this.handleChange}
-              value={this.state.date}
-              showTimeSelect
-              timeFormat="HH:mm"
-              dateFormat="MMMM d, yyyy h:mm aa"
-              timeCaption="time"
-              dateFormat="Pp"
-            />
+            <form onSubmit={this.handleSubmit}>
+              <DatePicker
+                className="calendar"
+                selected={this.state.startDate}
+                onChange={value => this.setState({ value })}
+                value={this.state.value}
+                showTimeSelect
+                timeFormat="HH:mm"
+                dateFormat="MMMM d, yyyy h:mm aa"
+                timeCaption="time"
+                dateFormat="Pp"
+              />
+              <input type="submit" value="Submit" />
+            </form>
           </div>
         </nav>
         <div className="section">
@@ -135,6 +163,16 @@ export default class App extends React.Component {
               />
             </div>
           </div>
+        </div>
+        <div>
+          <h1>Saved Videos</h1>
+          {this.state.videos.map(video => (
+            <div key={video.Key}>
+              <ol>
+                <li>{video.Key}</li>
+              </ol>
+            </div>
+          ))}
         </div>
       </div>
     );
