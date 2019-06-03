@@ -24,22 +24,20 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/api/savedvideo", (req, res) => {
-  let savedVideo = req.body.firstParam
-  console.log(savedVideo)
-  var newDate = moment(savedVideo, 'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]')
-  console.log("this is the params", newDate);
-  getSavedVideo(savedVideo, "michaelcain-livestream")
+  let savedVideo = new Date(req.body.firstParam)
+  savedVideo.setHours(savedVideo.getHours() - 4)
+  let newDate = savedVideo.toISOString()
+  let updatedDate = newDate.slice(0, 13);
+  let newKey = `test-${updatedDate}`
+  console.log(newKey)
+
+  getSavedVideo(newKey, "michaelcain-livestream")
     .then(function (data) {
       // let newArray = []
+      let objects;
       let newSavedVideo = JSON.parse(data.raw)
-      let updatedVideo = newSavedVideo["Contents"]
-      // let lastVideo = updatedVideo[0] 
-      // let latest;
-      // for (item of lastVideo) {
-      //   if (item.LastModified < )
-      // }
-      console.log("this is the saved video in POST", updatedVideo[0])   
-      res.send(updatedVideo[0])
+      let updatedVideo = newSavedVideo["Contents"]   
+      res.send(updatedVideo)
     })
 });
 
