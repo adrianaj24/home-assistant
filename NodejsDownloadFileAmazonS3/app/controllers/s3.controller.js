@@ -38,6 +38,8 @@ async function getObjectFromS3Bucket(bucket, key) {
   }
 }
 
+// var myVideoTracks = sourceBuffer.videoTracks;
+
 // function to download specific file in S3
 
 // exports.doDownload = (req, res) => {

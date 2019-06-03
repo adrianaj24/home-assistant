@@ -50,12 +50,13 @@ export function startlivestream() {
     sequences.push(chunk);
     sourceBuffer.appendBuffer(chunk);
     if (sequences.length > BUFFER_LENGTH - 1) {
-      console.log("sequences: ", sequences);
+      // console.log("sequences: ", sequences);
       sequences.splice(0, 1);
     }
   }
 
   const check = setInterval(function() {
+    console.log("intervalingg", check);
     fetchSequence();
   }, 6000);
 
