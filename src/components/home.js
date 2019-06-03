@@ -1,6 +1,7 @@
 import React from "react";
-import smarthomeImage from "../images/background.jpg";
+import smarthomeImage from "../images/background3.jpg";
 import "../css/home.css";
+import homeIcon from "../images/home-icon.svg";
 import styled from "styled-components";
 
 export default class Home extends React.Component {
@@ -11,7 +12,7 @@ export default class Home extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const theImage = this;
     setInterval(function() {
       theImage.setState({
@@ -47,12 +48,29 @@ export default class Home extends React.Component {
           <div className="animation-container">{this.renderImage()}</div>
         </div>
         <div className="main">
-          <h1>H🏠VEN</h1>
+          <h1 className="title">
+            {" "}
+            H
+            <img
+              className="house-img"
+              src="http://i68.tinypic.com/2ui7shu.png"
+            />
+            VEN
+          </h1>
           <div className="button-container">
-            <a href="http://localhost:3000/dashboard" className="rounded-btn1">
+            <a href="http://localhost:3000/dashboard" className="rounded-btn">
               📷
             </a>
-            <a href="#" className="rounded-btn">
+            <a href="http://localhost:3000/dashboard" className="rounded-btn">
+              🇨🇴
+            </a>
+            <a href="http://localhost:3000/dashboard" className="rounded-btn">
+              🇨🇴
+            </a>
+            <a href="http://localhost:3000/dashboard" className="rounded-btn">
+              🇨🇴
+            </a>
+            <a href="http://localhost:3000/dashboard" className="rounded-btn">
               🇨🇴
             </a>
           </div>
@@ -61,7 +79,3 @@ export default class Home extends React.Component {
     );
   }
 }
-
-// <div>
-//     <div>Home Page</div>
-// </div

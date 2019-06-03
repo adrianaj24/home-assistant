@@ -78,7 +78,12 @@ export default class App extends React.Component {
       <div style={rootStyles}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <Link className="navbar-brand" href="http://localhost:3000">
-            H🏠VEN
+            H
+            <img
+              className="house-img"
+              src="http://i68.tinypic.com/2ui7shu.png"
+            />
+            VEN
           </Link>
           <button
             className="navbar-toggler"

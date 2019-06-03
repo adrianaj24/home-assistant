@@ -10,7 +10,7 @@
 }
 
 .animation-container {
-  animation: slide 50s linear infinite;
+  animation: slide 70s linear infinite;
   display: flex;
 }
 
@@ -25,9 +25,16 @@
   left: 0;
 }
 
+.house-img {
+  width: 64px;
+  height: 64px;
+}
+
 .h1 h1 {
   font-family: "Overpass Mono", monospace;
   font-size: 10rem;
+  font-weight: 900;
+  -webkit-font-smoothing: antialiased;
 }
 
 .main {
@@ -40,26 +47,33 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  -webkit-font-smoothing: antialiased;
 }
 
 .rounded-btn {
-  border-radius: 75px;
-  border: 5px solid white;
-  padding: 16px;
-  text-decoration: none;
-  margin: 10px;
-  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border-radius: 100%;
+  border: solid 1px #fff;
+  display: block;
+  font-size: 1.75em;
+  height: 2.5em;
+  line-height: 2.5em;
+  position: relative;
+  text-align: center;
+  top: 0;
+  width: 2.5em;
+  transition: all 0.5s;
+  margin: 0.75rem;
 }
 
-.rounded-btn1 {
-  border-radius: 75px;
-  border: 5px solid white;
-  padding: 16px;
-  text-decoration: none;
-  margin: 10px;
-  cursor: pointer;
+.rounded-btn:hover {
+  opacity: 0.5;
+  transform: scale(1.5, 1.5);
 }
 
+.title {
+  font-size: 5rem;
+}
 .button-container {
   display: flex;
   justify-content: center;
