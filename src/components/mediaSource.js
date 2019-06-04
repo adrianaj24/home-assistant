@@ -50,22 +50,23 @@ export function startlivestream() {
     sequences.push(chunk);
     sourceBuffer.appendBuffer(chunk);
     if (sequences.length > BUFFER_LENGTH - 1) {
-      // console.log("sequences: ", sequences);
       sequences.splice(0, 1);
+      // console.log("length after splice: ", sequences.length);
     }
+    console.log("length after splice: ", sequences.length);
   }
 
   const check = setInterval(function() {
     console.log("intervalingg", check);
     fetchSequence();
-  }, 6000);
+  }, 3000);
 
   // function checkBuffer(_) {
-  //   console.log("checking buffer");
-  //   // if (sequences.length < BUFFER_LENGTH) {
-  //   console.log("this is the checkkk", check);
-  //   return check;
-  //   // }
+  //   console.log("id: ", sequences.id, sequences);
+  //   if (sequences.length < BUFFER_LENGTH) {
+  //     console.log("length after check: ", sequences.length);
+  //     fetchSequence();
+  //   }
   // }
 
   function seek(e) {

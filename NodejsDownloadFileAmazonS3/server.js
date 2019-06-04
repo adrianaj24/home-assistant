@@ -6,7 +6,7 @@ console.log("key", getKey);
 const express = require("express");
 const app = express();
 var cors = require("cors");
-
+mostRecentVideoKey = "";
 app.use(cors());
 
 let router = require("./app/routers/s3.router.js");
@@ -15,8 +15,18 @@ app.use("/api/files/:filename", router);
 app.get("/", async (req, res) => {
   var key = await getKey("michaelcain-livestream");
   var newObject = await getObject("michaelcain-livestream", key.Key);
-  console.log("NEW TESTERRRR", newObject.Body);
-  res.send(newObject.Body);
+  console.log("NEW TESTERRRR", newObject);
+  if (newObject.ETag === mostRecentVideoKey) {
+    console.log("Keys MATCH: !!!!!!!!!!!!!!!!!!!", newObject.ETag);
+  } else {
+    console.log(
+      "most Recent keyyyy!!!!!!!!!!!!!!! ",
+      newObject.ETag,
+      mostRecentVideoKey
+    );
+    mostRecentVideoKey = newObject.ETag;
+    res.send(newObject.Body);
+  }
 });
 
 // res.send({ oldVideo: newObject.Body });
