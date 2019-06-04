@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./css/app.css";
 import App from "./components/app";
-import { Router } from "react-router-dom";
+import Home from "./components/home";
+
+import { Router, Route } from "react-router-dom";
 import { history } from "./history";
 
 ReactDOM.render(
   <Router history={history}>
-    <App />
+    <Route path="/" exact component={Home} />
+    <Route path="/dashboard/" component={App} />
   </Router>,
   document.getElementById("root")
 );

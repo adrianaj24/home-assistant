@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
+import smarthomeImage2 from "../images/background2.png";
 import { startlivestream } from "./mediaSource.js";
 import "./mediaSource.js";
 import DatePicker from "react-datepicker2";
@@ -7,15 +8,33 @@ import moment from "moment-jalaali";
 import { loadDoc } from "./savedMedia.js";
 import "./savedMedia.js";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
+    this.state = {
+      date: moment(),
+      videos: [],
+      value: ""
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  // onChange = date => this.setState({ date });
+
+  // handleChange(date) {
+  //   this.setState({ startDate: date });
+  // }
+
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   let something = this.state.startDate;
+  // }
 
   handleChange(event) {
     this.setState({ value: event.target.value });
@@ -24,7 +43,7 @@ export default class App extends React.Component {
   handleSubmit(event) {
     alert("A name was submitted: " + this.state.value);
     var something = this.state.value;
-    var data = something._d
+    var data = something._d;
     event.preventDefault();
 
     fetch("http://localhost:8080/api/savedvideo", {
@@ -33,77 +52,128 @@ export default class App extends React.Component {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: 
-        JSON.stringify({firstParam: data.toLocaleString()})
-    });
+      body: JSON.stringify({ firstParam: data })
+    })
+      .then(res => res.json())
+      .then(response => this.setState({ videos: response }))
+      .catch(error => console.error("Error:", error));
   }
 
   render() {
     const rootStyles = {
-      display: "flex",
-      flexDirection: "column",
-      minHeight: "100vh"
+      backgroundImage: `url(${smarthomeImage2})`,
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      height: "100%"
     };
     const bodyStyle = {
       flex: "1"
     };
+    const btnStyle = {
+      height: "3rem",
+      padding: "0px, 12px, 12px",
+      borderradius: "75%"
+    };
     return (
       <div style={rootStyles}>
-        <div className="header">This is the title</div>
-        <div className="body" style={bodyStyle}>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <Link className="navbar-brand" href="http://localhost:3000">
+            H
+            <img
+              className="house-img"
+              src="http://i68.tinypic.com/2ui7shu.png"
+            />
+            VEN
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <Link className="nav-link" to="#">
+                  <span className="sr-only">(current)</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="#">
+                  Link
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div>
+              <form onSubmit={this.handleSubmit}>
+                <DatePicker
+                  onChange={value => this.setState({ value })}
+                  value={this.state.value}
+                />
+                <input type="submit" value="Submit" />
+              </form>
+            </div>
+          </div>
+        </nav>
+        <div className="section">
+          <div className="video">
+            <div className="videoWrapper">
+              <video
+                crossOrigin="anonymous"
+                autoPlay
+                controls
+                type="video/mp4"
+                id="my-video"
+                className="video"
+                src=""
+                width={700}
+                height={500}
+              />
+            </div>
+            <div className="videoBtn">
+              <div className="btn">
+                <button style={btnStyle} onClick={startlivestream}>
+                  Start Stream{" "}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="section">
           <div className="video">
             <video
               crossOrigin="anonymous"
               autoPlay
               controls
               type="video/mp4"
-              id="my-video"
+              id="saved-video"
               className="video"
               src=""
               width={700}
               height={500}
             />
             <div>
-              <button onClick={startlivestream}>Start Stream </button>
+              <button onClick={loadDoc}>Start saved video </button>
+            </div>
+            <div>
+              <h1>Saved Videos</h1>
+              {this.state.videos.map(video => (
+                <div key={video.Key}>
+                  <ol>
+                    <li>{video.Key}</li>
+                  </ol>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-       
-        <div className="video">
-          <video
-            crossOrigin="anonymous"
-            autoPlay
-            controls
-            type="video/mp4"
-            id="saved-video"
-            className="video"
-            src=""
-            width={700}
-            height={500}
-          />
-          {/* <form onSubmit={this.handleSubmit}>
-            <label>
-              Time:
-              <input
-                type="text"
-                value={this.state.value}
-                onChange={this.handleChange}
-              />
-            </label>
-            <input type="submit" value="Submit" />
-          </form> */}
-          <div>
-            <button onClick={loadDoc}>Start saved video </button>
-          </div>
-        </div>
-        <div>
-        <form onSubmit={this.handleSubmit}>
-          <DatePicker
-            onChange={value => this.setState({ value })}
-            value={this.state.value}
-          />
-          <input type="submit" value="Submit" />
-          </form>
         </div>
         <div className="footer">Footer</div>
       </div>
