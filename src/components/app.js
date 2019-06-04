@@ -76,12 +76,12 @@ export default class App extends React.Component {
     };
     return (
       <div style={rootStyles}>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light1">
           <Link className="navbar-brand" href="http://localhost:3000">
             H
             <img
               className="house-img"
-              src="http://i68.tinypic.com/2ui7shu.png"
+              src="http://i65.tinypic.com/213rhox.png"
             />
             VEN
           </Link>
@@ -106,21 +106,20 @@ export default class App extends React.Component {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="#">
-                  Link
+                  About Us
                 </Link>
               </li>
             </ul>
           </div>
-          <div>
-            <div>
-              <form onSubmit={this.handleSubmit}>
-                <DatePicker
-                  onChange={value => this.setState({ value })}
-                  value={this.state.value}
-                />
-                <input type="submit" value="Submit" />
-              </form>
-            </div>
+          <div className="date-form" />
+          <div className="date-form">
+            <form onSubmit={this.handleSubmit}>
+              <DatePicker
+                onChange={value => this.setState({ value })}
+                value={this.state.value}
+              />
+            </form>
+            <input className="submit-button" type="submit" value="Submit" />
           </div>
         </nav>
         <div className="section">
