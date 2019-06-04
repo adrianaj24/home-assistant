@@ -40,10 +40,11 @@ app.post("/api/savedvideo", (req, res) => {
   let newDate = savedVideo.toISOString();
   let updatedDate = newDate.slice(0, 13);
   let newKey = `test-${updatedDate}`;
-  // console.log(newKey)
+  // console.log("this is the newKey", newKey);
 
   getSavedVideo(newKey, "michaelcain-livestream").then(function(data) {
     let newSavedVideo = JSON.parse(data.raw);
+    console.log("this is the new savedvideo", newSavedVideo);
     let updatedVideo = newSavedVideo["Contents"];
     console.log("this is the saved video", updatedVideo);
     res.json(updatedVideo);

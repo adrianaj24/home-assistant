@@ -73,13 +73,6 @@ async function getObjectFromS3Bucket(bucket, key) {
 //     })
 //     .pipe(res);
 // };
-// s3.listObjects(params, function(err, data) {
-// 		if (err) {
-// 		console.log(err, err.stack)
-// 	} else {
-// 		console.log(data);
-// 	}
-// })
 module.exports.getObjectFromS3Bucket = getObjectFromS3Bucket;
 module.exports.getLatestKeyFromS3Bucket = getLatestKeyFromS3Bucket;
 module.exports.getSavedVideo = getSavedVideo;

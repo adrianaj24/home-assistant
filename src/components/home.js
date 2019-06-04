@@ -1,7 +1,7 @@
 import React from "react";
-import smarthomeImage from "../images/background3.jpg";
+import smarthomeImage from "../images/night-sky1.jpg";
 import "../css/home.css";
-import homeIcon from "../images/home-icon.svg";
+import cameraIcon from "../images/photo-camera.png";
 import styled from "styled-components";
 
 export default class Home extends React.Component {
@@ -53,25 +53,26 @@ export default class Home extends React.Component {
             H
             <img
               className="house-img"
-              src="http://i68.tinypic.com/2ui7shu.png"
+              src="http://i65.tinypic.com/213rhox.png"
             />
             VEN
           </h1>
           <div className="button-container">
             <a href="http://localhost:3000/dashboard" className="rounded-btn">
-              📷
+              {" "}
+              <img src="http://i65.tinypic.com/2ur0yrt.png" />
             </a>
             <a href="http://localhost:3000/dashboard" className="rounded-btn">
-              🇨🇴
+              <img src="http://i67.tinypic.com/24gojnn.png" />
             </a>
             <a href="http://localhost:3000/dashboard" className="rounded-btn">
-              🇨🇴
+              <img src="http://i66.tinypic.com/1zvxuab.png" />
             </a>
             <a href="http://localhost:3000/dashboard" className="rounded-btn">
-              🇨🇴
+              <img src="http://i63.tinypic.com/wwkgpk.png" />
             </a>
             <a href="http://localhost:3000/dashboard" className="rounded-btn">
-              🇨🇴
+              <img src="http://i68.tinypic.com/2ziq1eh.png" />
             </a>
           </div>
         </div>
