@@ -66,6 +66,12 @@ export default class App extends React.Component {
       backgroundSize: "cover",
       height: "100%"
     };
+    var today = new Date();
+    var lastWeek = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() - 14
+    );
     const bodyStyle = {
       flex: "1"
     };
@@ -174,6 +180,7 @@ export default class App extends React.Component {
               ))}
             </div>
           </div>
+          <button onClick={startlivestream}>Start Stream </button>
         </div>
         <div className="footer">Footer</div>
       </div>

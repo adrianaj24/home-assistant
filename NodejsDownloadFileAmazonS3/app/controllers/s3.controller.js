@@ -1,7 +1,7 @@
 var stream = require("stream");
 const s3 = require("../config/s3.config.js");
 const env = require("../config/.env");
-var awsCli = require('aws-cli-js');
+var awsCli = require("aws-cli-js");
 var Options = awsCli.Options;
 var Aws = awsCli.Aws;
 var Options = new Options(
@@ -19,6 +19,7 @@ async function mainFunction() {
 mainFunction();
 
 // function to loop thru all items in s3 bucket.
+
 async function getLatestKeyFromS3Bucket(bucket) {
   const s3Client = s3.s3Client;
   let params = { Bucket: bucket };
@@ -38,10 +39,11 @@ async function getLatestKeyFromS3Bucket(bucket) {
 }
 
 async function getSavedVideo(video, bucket) {
-  let params = { Bucket: bucket}
-  return aws.command(`s3api list-objects --bucket ${params.Bucket} --prefix "${video}"`)
+  let params = { Bucket: bucket };
+  return aws.command(
+    `s3api list-objects --bucket ${params.Bucket} --prefix "${video}"`
+  );
 }
-
 
 async function getObjectFromS3Bucket(bucket, key) {
   const s3Client = s3.s3Client;
@@ -53,6 +55,8 @@ async function getObjectFromS3Bucket(bucket, key) {
     throw error;
   }
 }
+
+// var myVideoTracks = sourceBuffer.videoTracks;
 
 // function to download specific file in S3
 
@@ -69,10 +73,13 @@ async function getObjectFromS3Bucket(bucket, key) {
 //     })
 //     .pipe(res);
 // };
-
-
-
-
+// s3.listObjects(params, function(err, data) {
+// 		if (err) {
+// 		console.log(err, err.stack)
+// 	} else {
+// 		console.log(data);
+// 	}
+// })
 module.exports.getObjectFromS3Bucket = getObjectFromS3Bucket;
 module.exports.getLatestKeyFromS3Bucket = getLatestKeyFromS3Bucket;
 module.exports.getSavedVideo = getSavedVideo;
