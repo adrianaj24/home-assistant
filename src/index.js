@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "./css/app.css";
 import App from "./components/app";
 import Home from "./components/home";
-
 import { Router, Route } from "react-router-dom";
 import { history } from "./history";
 
