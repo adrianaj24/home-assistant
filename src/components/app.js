@@ -179,7 +179,6 @@ export default class App extends React.Component {
               ))}
             </div>
           </div>
-          <button onClick={startlivestream}>Start Stream </button>
         </div>
         <div className="footer">Footer</div>
       </div>

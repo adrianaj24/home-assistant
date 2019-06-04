@@ -29,6 +29,10 @@ body {
   margin: 0.75rem;
 }
 
+.house-img {
+  font-size: 5rem;
+}
+
 .calendar {
   margin-right: 10rem;
 }
