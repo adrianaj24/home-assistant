@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactPlayer from "react-player";
 import smarthomeImage2 from "../images/background2.png";
 import { startlivestream } from "./mediaSource.js";
 import "./mediaSource.js";
@@ -9,8 +8,11 @@ import { loadDoc } from "./savedMedia.js";
 import "./savedMedia.js";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import "../containers/Home/Home1.scss";
+import VideoGrid from "./VideoGrid/VideoGrid";
+import { Footer } from "./footer";
 import "react-datepicker/dist/react-datepicker.css";
+import "../css/datePicker.scss";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -75,19 +77,19 @@ export default class App extends React.Component {
     const bodyStyle = {
       flex: "1"
     };
-    const btnStyle = {
-      height: "3rem",
-      padding: "0px, 12px, 12px",
-      borderradius: "75%"
-    };
+    // const btnStyle = {
+    //   height: "3rem",
+    //   padding: "0px, 12px, 12px",
+    //   borderradius: "75%"
+    // };
     return (
       <div style={rootStyles}>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light1">
           <Link className="navbar-brand" href="http://localhost:3000">
             H
             <img
               className="house-img"
-              src="http://i68.tinypic.com/2ui7shu.png"
+              src="http://i65.tinypic.com/213rhox.png"
             />
             VEN
           </Link>
@@ -112,22 +114,18 @@ export default class App extends React.Component {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="#">
-                  Link
+                  About Us
                 </Link>
               </li>
             </ul>
           </div>
-          <div>
-            <div>
-              <form onSubmit={this.handleSubmit}>
-                <DatePicker
-                  onChange={value => this.setState({ value })}
-                  value={this.state.value}
-                />
-                <input type="submit" value="Submit" />
-              </form>
-            </div>
-          </div>
+          <form className="datepicker-form" onSubmit={this.handleSubmit}>
+            <DatePicker
+              onChange={value => this.setState({ value })}
+              value={this.state.value}
+            />
+            <input className="submit-button" type="submit" value="Submit" />
+          </form>
         </nav>
         <div className="section">
           <div className="video">
@@ -144,45 +142,24 @@ export default class App extends React.Component {
                 height={500}
               />
             </div>
-            <div className="videoBtn">
-              <div className="btn">
-                <button style={btnStyle} onClick={startlivestream}>
-                  Start Stream{" "}
-                </button>
-              </div>
-            </div>
+            <button className="videoBtn" onClick={startlivestream}>
+              Start Stream
+            </button>
+            {/* <div className="videoBtn">
+              <a href="#" class="round-button" onClick={startlivestream}>
+                <i className="fa fa-play fa-2x" />
+              </a>
+            </div> */}
           </div>
         </div>
         <div className="section">
           <div className="video">
-            <video
-              crossOrigin="anonymous"
-              autoPlay
-              controls
-              type="video/mp4"
-              id="saved-video"
-              className="video"
-              src=""
-              width={700}
-              height={500}
-            />
             <div>
-              <button onClick={loadDoc}>Start saved video </button>
-            </div>
-            <div>
-              <h1>Saved Videos</h1>
-              {this.state.videos.map(video => (
-                <div key={video.Key}>
-                  <ol>
-                    <li>{video.Key}</li>
-                  </ol>
-                </div>
-              ))}
+              <VideoGrid videos={this.state.videos} />
             </div>
           </div>
-          <button onClick={startlivestream}>Start Stream </button>
         </div>
-        <div className="footer">Footer</div>
+        {/* <div className="footer"><Footer /></div> */}
       </div>
     );
   }

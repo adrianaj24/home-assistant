@@ -13,6 +13,53 @@ body {
   margin: 0;
 }
 
+body {
+  background-color: #666;
+}
+.round-button {
+  box-sizing: border-box;
+  display: block;
+  width: 80px;
+  height: 80px;
+  padding-top: 14px;
+  padding-left: 8px;
+  line-height: 20px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  color: #f5f5f5;
+  text-align: center;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.round-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 10px rgba(255, 255, 100, 1);
+  text-shadow: 0px 0px 10px rgba(255, 255, 100, 1);
+}
+
+.btn {
+  transition: all 0.2s ease-in-out;
+  border-radius: 100%;
+  border: solid 1px rgb(247, 243, 243);
+  display: block;
+  font-size: 1.75em;
+  height: 2.5em;
+  line-height: 2.5em;
+  position: relative;
+  text-align: center;
+  top: 0;
+  width: 2.5em;
+  transition: all 0.5s;
+  margin: 0.75rem;
+}
+
+.house-img {
+  font-size: 5rem;
+}
+
 .calendar {
   margin-right: 10rem;
 }
@@ -26,8 +73,19 @@ body {
   font-size: 50px;
 }
 
+.navbar-light .navbar-brand {
+  color: white;
+  padding-left: 2rem;
+}
+.bg-light {
+  background-color: purple;
+}
 .calendar {
   font-size: 1.25rem;
+}
+
+.date-form {
+  background-color: aqua;
 }
 
 .videoWrapper {
@@ -35,7 +93,7 @@ body {
 }
 
 .footer {
-  height: 150px;
+  height: 50px;
   border-style: dotted;
   color: palevioletred;
 }

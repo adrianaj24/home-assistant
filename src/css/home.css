@@ -28,12 +28,13 @@
 .house-img {
   width: 64px;
   height: 64px;
+  margin-bottom: 1.5rem;
 }
 
 .h1 h1 {
   font-family: "Overpass Mono", monospace;
   font-size: 10rem;
-  font-weight: 900;
+  /* font-weight: 500; */
   -webkit-font-smoothing: antialiased;
 }
 
@@ -42,7 +43,7 @@
   position: absolute;
   width: 100vw;
   height: 100vh;
-  color: white;
+  color: rgb(248, 245, 245);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,7 +54,7 @@
 .rounded-btn {
   transition: all 0.2s ease-in-out;
   border-radius: 100%;
-  border: solid 1px #fff;
+  border: solid 1px rgb(247, 243, 243);
   display: block;
   font-size: 1.75em;
   height: 2.5em;
@@ -67,7 +68,7 @@
 }
 
 .rounded-btn:hover {
-  opacity: 0.5;
+  opacity: 4;
   transform: scale(1.5, 1.5);
 }
 
