@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactPlayer from "react-player";
 import smarthomeImage2 from "../images/background2.png";
 import { startlivestream } from "./mediaSource.js";
 import "./mediaSource.js";
@@ -9,8 +8,11 @@ import { loadDoc } from "./savedMedia.js";
 import "./savedMedia.js";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import "../containers/Home/Home1.scss";
+import VideoGrid from "./VideoGrid/VideoGrid";
 
 import "react-datepicker/dist/react-datepicker.css";
+import "../css/datePicker.scss";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -117,16 +119,13 @@ export default class App extends React.Component {
               </li>
             </ul>
           </div>
-          <div className="date-form" />
-          <div className="date-form">
-            <form onSubmit={this.handleSubmit}>
-              <DatePicker
-                onChange={value => this.setState({ value })}
-                value={this.state.value}
-              />
-            </form>
+          <form className="datepicker-form" onSubmit={this.handleSubmit}>
+            <DatePicker
+              onChange={value => this.setState({ value })}
+              value={this.state.value}
+            />
             <input className="submit-button" type="submit" value="Submit" />
-          </div>
+          </form>
         </nav>
         <div className="section">
           <div className="video">
@@ -154,29 +153,8 @@ export default class App extends React.Component {
         </div>
         <div className="section">
           <div className="video">
-            <video
-              crossOrigin="anonymous"
-              autoPlay
-              controls
-              type="video/mp4"
-              id="saved-video"
-              className="video"
-              src=""
-              width={700}
-              height={500}
-            />
             <div>
-              <button onClick={loadDoc}>Start saved video </button>
-            </div>
-            <div>
-              <h1>Saved Videos</h1>
-              {this.state.videos.map(video => (
-                <div key={video.Key}>
-                  <ol>
-                    <li>{video.Key}</li>
-                  </ol>
-                </div>
-              ))}
+              <VideoGrid videos={this.state.videos} />
             </div>
           </div>
         </div>

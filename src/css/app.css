@@ -48,6 +48,7 @@ body {
 
 .navbar-light .navbar-brand {
   color: white;
+  padding-left: 2rem;
 }
 .bg-light {
   background-color: purple;
@@ -65,7 +66,7 @@ body {
 }
 
 .footer {
-  height: 150px;
+  height: 50px;
   border-style: dotted;
   color: palevioletred;
 }

@@ -5,6 +5,7 @@ import App from "./components/app";
 import Home from "./components/home";
 import { Router, Route } from "react-router-dom";
 import { history } from "./history";
+import "semantic-ui-css/semantic.min.css";
 
 ReactDOM.render(
   <Router history={history}>
