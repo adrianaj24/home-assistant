@@ -10,7 +10,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import "../containers/Home/Home1.scss";
 import VideoGrid from "./VideoGrid/VideoGrid";
-
+import { Footer } from "./footer";
 import "react-datepicker/dist/react-datepicker.css";
 import "../css/datePicker.scss";
 
@@ -77,11 +77,11 @@ export default class App extends React.Component {
     const bodyStyle = {
       flex: "1"
     };
-    const btnStyle = {
-      height: "3rem",
-      padding: "0px, 12px, 12px",
-      borderradius: "75%"
-    };
+    // const btnStyle = {
+    //   height: "3rem",
+    //   padding: "0px, 12px, 12px",
+    //   borderradius: "75%"
+    // };
     return (
       <div style={rootStyles}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light1">
@@ -142,13 +142,14 @@ export default class App extends React.Component {
                 height={500}
               />
             </div>
-            <div className="videoBtn">
-              <div className="btn">
-                <button style={btnStyle} onClick={startlivestream}>
-                  Start Stream{" "}
-                </button>
-              </div>
-            </div>
+            <button className="videoBtn" onClick={startlivestream}>
+              Start Stream
+            </button>
+            {/* <div className="videoBtn">
+              <a href="#" class="round-button" onClick={startlivestream}>
+                <i className="fa fa-play fa-2x" />
+              </a>
+            </div> */}
           </div>
         </div>
         <div className="section">
@@ -158,7 +159,7 @@ export default class App extends React.Component {
             </div>
           </div>
         </div>
-        <div className="footer">Footer</div>
+        {/* <div className="footer"><Footer /></div> */}
       </div>
     );
   }
