@@ -59,7 +59,7 @@ export function startlivestream() {
   const check = setInterval(function() {
     console.log("intervalingg", check);
     fetchSequence();
-  }, 3000);
+  }, 3200);
 
   // function checkBuffer(_) {
   //   console.log("id: ", sequences.id, sequences);
