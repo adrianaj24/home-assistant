@@ -4,7 +4,7 @@ var getKey = controller.getLatestKeyFromS3Bucket;
 var getSavedVideo = controller.getSavedVideo;
 let router = require("./app/routers/s3.router.js");
 const moment = require("moment");
-let savedRoute = require("./app/routers/s3.savedVideo.js");
+// let savedRoute = require("./app/routers/s3.savedVideo.js");
 // const aws = controller.getSavedVideo;
 var stream = require("stream");
 
@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 var cors = require("cors");
 mostRecentVideoKey = "";
 app.use(cors());
-app.use("/", savedRoute);
+// app.use("/", savedRoute);
 
 app.get("/", async (req, res) => {
   var key = await getKey("michaelcain-livestream");
