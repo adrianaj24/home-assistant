@@ -1,16 +1,16 @@
 import React, { Component } from "react";
-import smarthomeImage2 from "../images/background2.png";
+import smarthomeImage2 from "../images/background4.png";
 import { startlivestream } from "./mediaSource.js";
 import "./mediaSource.js";
 import DatePicker from "react-datepicker2";
-import moment from "moment-jalaali";
 import { loadDoc } from "./savedMedia.js";
 import "./savedMedia.js";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../containers/Home/Home1.scss";
+import moment from "moment-timezone";
 import VideoGrid from "./VideoGrid/VideoGrid";
-import { Footer } from "./footer";
+// import { Footer } from "././footer";
 import "react-datepicker/dist/react-datepicker.css";
 import "../css/datePicker.scss";
 
@@ -18,9 +18,9 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      date: moment(),
+      date: "",
       videos: [],
-      value: ""
+      value: moment()
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -84,12 +84,12 @@ export default class App extends React.Component {
     // };
     return (
       <div style={rootStyles}>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light1">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <Link className="navbar-brand" href="http://localhost:3000">
             H
             <img
               className="house-img"
-              src="http://i65.tinypic.com/213rhox.png"
+              src="http://i67.tinypic.com/b5qsm9.png"
             />
             VEN
           </Link>
@@ -152,14 +152,31 @@ export default class App extends React.Component {
             </div> */}
           </div>
         </div>
-        <div className="section">
-          <div className="video">
-            <div>
-              <VideoGrid videos={this.state.videos} />
-            </div>
+        <div className="video">
+          <div>
+            <VideoGrid videos={this.state.videos} />
           </div>
         </div>
-        {/* <div className="footer"><Footer /></div> */}
+
+        <div className="button-container1">
+          <a href="http://localhost:3000/dashboard" className="rounded-btn1">
+            <img src="http://i65.tinypic.com/i2k8jc.png" />
+          </a>
+          <a href="http://localhost:3000/dashboard" className="rounded-btn1">
+            <img src="http://i66.tinypic.com/2nbslmx.png" />
+          </a>
+          <a href="http://localhost:3000/dashboard" className="rounded-btn1">
+            <img src="http://i67.tinypic.com/140lyki.png" />
+          </a>
+          <a href="http://localhost:3000/dashboard" className="rounded-btn1">
+            <img src="http://i66.tinypic.com/29qdu6o.png" />
+          </a>
+          <div className="footer">Contact Us: customersupport@haven.com</div>
+          {/* <div className="contact-us">
+            {" "}
+            Contact Us: customersupport@haven.com{" "}
+          </div> */}
+        </div>
       </div>
     );
   }

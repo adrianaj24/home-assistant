@@ -23,7 +23,7 @@ export function startlivestream() {
     sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
     sourceBuffer.mode = "sequence";
     fetchSequence();
-    video.addEventListener("timeupdate", check);
+    // video.addEventListener("timeupdate", check);
     console.log("I am checkingggg", check);
     video.addEventListener("canplay", function() {
       video.play();
@@ -57,7 +57,7 @@ export function startlivestream() {
   }
 
   const check = setInterval(function() {
-    console.log("intervalingg", check);
+    // console.log("intervalingg", check);
     fetchSequence();
   }, 3600);
 
