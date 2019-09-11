@@ -43,7 +43,6 @@ export default class App extends React.Component {
   }
 
   handleSubmit(event) {
-    alert("A name was submitted: " + this.state.value);
     var something = this.state.value;
     var data = something._d;
     event.preventDefault();
@@ -77,11 +76,7 @@ export default class App extends React.Component {
     const bodyStyle = {
       flex: "1"
     };
-    // const btnStyle = {
-    //   height: "3rem",
-    //   padding: "0px, 12px, 12px",
-    //   borderradius: "75%"
-    // };
+    
     return (
       <div style={rootStyles}>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -145,11 +140,6 @@ export default class App extends React.Component {
             <button className="videoBtn" onClick={startlivestream}>
               Start Stream
             </button>
-            {/* <div className="videoBtn">
-              <a href="#" class="round-button" onClick={startlivestream}>
-                <i className="fa fa-play fa-2x" />
-              </a>
-            </div> */}
           </div>
         </div>
         <div className="video">
