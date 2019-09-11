@@ -24,7 +24,6 @@ async function getLatestKeyFromS3Bucket(bucket) {
   try {
     const response = await s3Client.listObjects(params).promise();
     let latest = response.Contents[0];
-    // console.log("this is the latest", latest)
     for (let key of response.Contents) {
       if (key.LastModified > latest.LastModified) {
         latest = key;
@@ -54,23 +53,6 @@ async function getObjectFromS3Bucket(bucket, key) {
   }
 }
 
-// var myVideoTracks = sourceBuffer.videoTracks;
-
-// function to download specific file in S3
-
-// exports.doDownload = (req, res) => {
-//   const s3Client = s3.s3Client;
-//   const params = s3.downloadParams;
-//   params.Key = req.params.filename;
-
-//   s3Client
-//     .getObject(params)
-//     .createReadStream()
-//     .on("error", function(err) {
-//       res.status(500).json({ error: "Error -> " + err });
-//     })
-//     .pipe(res);
-// };
 module.exports.getObjectFromS3Bucket = getObjectFromS3Bucket;
 module.exports.getLatestKeyFromS3Bucket = getLatestKeyFromS3Bucket;
 module.exports.getSavedVideo = getSavedVideo;
