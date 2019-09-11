@@ -5,12 +5,10 @@ import "./mediaSource.js";
 import DatePicker from "react-datepicker2";
 import { loadDoc } from "./savedMedia.js";
 import "./savedMedia.js";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import "../containers/Home/Home1.scss";
-import moment from "moment-timezone";
+import from "moment-timezone";
 import VideoGrid from "./VideoGrid/VideoGrid";
-// import { Footer } from "././footer";
 import "react-datepicker/dist/react-datepicker.css";
 import "../css/datePicker.scss";
 
