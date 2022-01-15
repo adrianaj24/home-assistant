@@ -35,7 +35,7 @@
     "scss": "^0.2.4",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.1",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.5",
     "styled-components": "^4.2.1",
     "video.js": "^7.5.4",
     "yarn": "^1.16.0"
