@@ -19,7 +19,7 @@
     "history": "^4.9.0",
     "keyframe": "^2.1.0",
     "moment-jalaali": "^0.8.3",
-    "moment-timezone": "^0.5.25",
+    "moment-timezone": "^0.5.35",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-color-scroll": "^0.1.3",
